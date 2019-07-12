@@ -206,6 +206,11 @@ class FireEyeAPI(sandboxapi.SandboxAPI):
         return score
 
 
+    def logout(self):
+        """The FireEye AX has a limit of 100 concurrent sessions, so be sure to logout"""
+        self._request("/auth/logout")
+
+
 def fireeye_loop(fireeye, filename):
     # test run
     with open(arg, "rb") as handle:
@@ -272,3 +277,5 @@ if __name__ == "__main__":
 
     else:
         usage()
+
+    fireeye.logout()
